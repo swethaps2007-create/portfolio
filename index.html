@@ -1,0 +1,1588 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f4f0e7">
+<title>Swetha — A Developer in Progress</title>
+
+<style>
+/* =================================
+   1. GLOBAL DESIGN
+================================= */
+:root {
+    --paper: #f4f0e7;
+    --ink: #191919;
+    --muted: #77766f;
+    --lime: #c8ff47;
+    --purple: #b8a0ff;
+    --line: #d7d1c5;
+    --mono: "Courier New", monospace;
+    --display: Arial, Helvetica, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;
+}
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    overflow-x: hidden;
+}
+
+button, input {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+::selection {
+    background: var(--lime);
+    color: var(--ink);
+}
+
+.wrap {
+    width: min(1120px, 90%);
+    margin: auto;
+}
+
+.eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.accent {
+    color: #7153ce;
+}
+
+.section {
+    padding: 100px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 45px;
+}
+
+.section-heading h2 {
+    font-family: var(--display);
+    font-size: clamp(35px, 6vw, 65px);
+    letter-spacing: -3px;
+    line-height: .98;
+    margin-top: 12px;
+}
+
+.section-heading p {
+    max-width: 270px;
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+/* =================================
+   2. NAVIGATION
+================================= */
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(244, 240, 231, .94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+    min-height: 66px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 900;
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+
+.brand span {
+    background: var(--lime);
+    padding: 4px 7px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 11px;
+    color: #555;
+}
+
+.nav-links a:hover {
+    color: #7153ce;
+}
+
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--ink);
+    padding: 9px 12px;
+}
+
+/* =================================
+   3. HERO / CONSTRUCTION SITE
+================================= */
+.hero {
+    min-height: 690px;
+    padding: 70px 0 65px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .3;
+    background-image: radial-gradient(#aaa398 .7px, transparent .7px);
+    background-size: 19px 19px;
+}
+
+.hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.status-line {
+    display: inline-flex;
+    gap: 9px;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    padding: 9px 13px;
+    font-size: 10px;
+    background: var(--paper);
+    margin-bottom: 32px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #7cae24;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #dff2b5;
+}
+
+.hero h1 {
+    font-family: var(--display);
+    font-size: clamp(58px, 9vw, 110px);
+    line-height: .84;
+    letter-spacing: -8px;
+    margin-bottom: 28px;
+}
+
+.hero h1 .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink);
+}
+
+.hero-description {
+    max-width: 475px;
+    font-size: 13px;
+    line-height: 2;
+    color: #55534e;
+}
+
+.hero-description strong {
+    color: var(--ink);
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.btn {
+    min-height: 48px;
+    padding: 14px 19px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    transition: transform .2s, background .2s, color .2s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn.light {
+    color: var(--ink);
+    background: transparent;
+}
+
+.btn.lime {
+    color: var(--ink);
+    background: var(--lime);
+    border-color: var(--ink);
+}
+
+.hero-note {
+    margin-top: 30px;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* Illustrated progress panel */
+.blueprint {
+    position: relative;
+    background: #21211f;
+    color: #f4f0e7;
+    padding: 25px;
+    transform: rotate(1.5deg);
+    box-shadow: 12px 12px 0 var(--lime);
+}
+
+.blueprint-top {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #454540;
+    font-size: 10px;
+    color: #bcbab2;
+}
+
+.blueprint-art {
+    height: 245px;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    background-image:
+        linear-gradient(#ffffff0d 1px, transparent 1px),
+        linear-gradient(90deg, #ffffff0d 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+
+.blueprint-art::before {
+    content: "</>";
+    font-family: var(--mono);
+    font-size: clamp(75px, 11vw, 120px);
+    font-weight: bold;
+    color: var(--lime);
+    transform: rotate(-8deg);
+    text-shadow: 5px 5px 0 #ffffff16;
+}
+
+.art-label {
+    position: absolute;
+    right: 8px;
+    bottom: 12px;
+    font-size: 9px;
+    color: #aaa;
+}
+
+.blueprint-info {
+    padding-top: 23px;
+}
+
+.blueprint-info .label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    margin-bottom: 12px;
+}
+
+.progress-track {
+    height: 10px;
+    background: #44443e;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 38%;
+    height: 100%;
+    background: var(--lime);
+    transition: width 1s ease;
+}
+
+.blueprint-info p {
+    margin-top: 14px;
+    color: #bdbbb4;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.sticker {
+    position: absolute;
+    top: -18px;
+    right: -14px;
+    background: var(--purple);
+    color: var(--ink);
+    padding: 11px 13px;
+    font-weight: bold;
+    font-size: 10px;
+    transform: rotate(8deg);
+}
+
+/* =================================
+   4. RUNNING CODE STRIP
+================================= */
+.code-strip {
+    overflow: hidden;
+    background: var(--lime);
+    border-bottom: 1px solid var(--ink);
+    padding: 15px 0;
+}
+
+.marquee {
+    display: flex;
+    width: max-content;
+    animation: move 27s linear infinite;
+}
+
+.marquee span {
+    padding-right: 45px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+@keyframes move {
+    to { transform: translateX(-50%); }
+}
+
+/* =================================
+   5. SOURCE CODE IDENTITY
+================================= */
+.code-panel {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    border: 1px solid var(--ink);
+    background: #20201e;
+    color: #eae7de;
+}
+
+.code-sidebar {
+    padding: 28px;
+    border-right: 1px solid #454540;
+}
+
+.code-sidebar h3 {
+    font-size: 12px;
+    margin: 25px 0 12px;
+    color: var(--lime);
+}
+
+.code-sidebar p {
+    color: #bcbab2;
+    font-size: 11px;
+    line-height: 2;
+}
+
+.file-row {
+    padding: 12px 0;
+    border-bottom: 1px solid #454540;
+    font-size: 11px;
+    color: #d6d3ca;
+}
+
+.file-row span {
+    color: var(--lime);
+    margin-right: 8px;
+}
+
+.code-main {
+    padding: 30px;
+    overflow-x: auto;
+}
+
+.code-window-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 28px;
+}
+
+.code-window-bar i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #777;
+}
+
+.code-main pre {
+    font: 12px/2 var(--mono);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.syntax-purple { color: #c2a5ff; }
+.syntax-green { color: #c8ff47; }
+.syntax-orange { color: #ffbd87; }
+.syntax-muted { color: #8f908a; }
+
+/* =================================
+   6. MUSEUM EXHIBITS
+================================= */
+.museum {
+    background: #ebe6dc;
+}
+
+.exhibit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.exhibit {
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    text-align: left;
+    color: var(--ink);
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+}
+
+.exhibit:hover {
+    transform: translateY(-6px);
+    box-shadow: 7px 7px 0 var(--ink);
+}
+
+.exhibit-art {
+    height: 225px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--ink);
+}
+
+.exhibit-art.html-art {
+    background: #ffc89f;
+}
+
+.exhibit-art.css-art {
+    background: #c9b7ff;
+}
+
+.exhibit-art.idea-art {
+    background: #c8ff47;
+}
+
+.exhibit-art.library-art {
+    background: #b8d8d0;
+}
+
+.big-symbol {
+    font-family: var(--display);
+    font-size: clamp(70px, 10vw, 120px);
+    font-weight: 900;
+    letter-spacing: -8px;
+    transition: transform .3s;
+}
+
+.exhibit:hover .big-symbol {
+    transform: scale(1.12) rotate(-5deg);
+}
+
+.art-number {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 10px;
+}
+
+.art-stamp {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    border: 1px solid var(--ink);
+    padding: 7px 9px;
+    font-size: 9px;
+    background: var(--paper);
+    transform: rotate(-5deg);
+}
+
+.exhibit-copy {
+    padding: 23px;
+}
+
+.exhibit-copy .eyebrow {
+    color: #7153ce;
+    font-size: 9px;
+}
+
+.exhibit-copy h3 {
+    font-family: var(--display);
+    font-size: 25px;
+    letter-spacing: -1px;
+    margin: 11px 0;
+}
+
+.exhibit-copy p {
+    color: #66635c;
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.exhibit-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 22px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* =================================
+   7. LEARNING LOG
+================================= */
+.timeline {
+    border-top: 1px solid var(--ink);
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    gap: 20px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+}
+
+.timeline-date {
+    font-size: 10px;
+    color: var(--muted);
+    padding-top: 5px;
+}
+
+.timeline-item h3 {
+    font-family: var(--display);
+    font-size: 23px;
+    margin-bottom: 9px;
+}
+
+.timeline-item p {
+    max-width: 500px;
+    font-size: 11px;
+    color: #68655e;
+    line-height: 1.9;
+}
+
+.timeline-status {
+    justify-self: end;
+    border: 1px solid var(--line);
+    padding: 7px 9px;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.timeline-status.done {
+    background: var(--lime);
+    border-color: var(--ink);
+}
+
+/* =================================
+   8. INTERACTIVE TERMINAL
+================================= */
+.terminal {
+    background: #20201e;
+    color: #efede6;
+    border: 1px solid var(--ink);
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #454540;
+    font-size: 10px;
+    color: #bdbbb4;
+}
+
+.terminal-body {
+    padding: 23px;
+    min-height: 220px;
+    font-size: 12px;
+    line-height: 2;
+}
+
+.terminal-output {
+    color: #c9c6bd;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin-bottom: 12px;
+}
+
+.terminal-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.terminal-prompt {
+    color: var(--lime);
+}
+
+.terminal-form input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    caret-color: var(--lime);
+    font-size: 12px;
+}
+
+.terminal-form button {
+    border: 1px solid var(--lime);
+    background: var(--lime);
+    color: var(--ink);
+    padding: 8px 12px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.command-hints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 23px 22px;
+}
+
+.command-hints button {
+    background: transparent;
+    color: var(--lime);
+    border: 1px solid #55554e;
+    padding: 7px 10px;
+    font-size: 10px;
+}
+
+/* =================================
+   9. CONTACT / ENDING
+================================= */
+.contact-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 100px 0 35px;
+}
+
+.contact-section .eyebrow {
+    color: var(--lime);
+}
+
+.contact-title {
+    font-family: var(--display);
+    font-size: clamp(48px, 9vw, 100px);
+    letter-spacing: -6px;
+    line-height: .95;
+    margin: 25px 0;
+}
+
+.contact-title span {
+    color: var(--lime);
+}
+
+.contact-intro {
+    color: #bbb8b0;
+    font-size: 12px;
+    line-height: 2;
+    max-width: 500px;
+}
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.contact-links .btn {
+    border-color: #66645e;
+}
+
+.contact-links .btn:hover {
+    background: var(--lime);
+    color: var(--ink);
+    border-color: var(--lime);
+}
+
+.final-note {
+    margin-top: 90px;
+    padding-top: 20px;
+    border-top: 1px solid #454540;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #a8a69e;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.final-note strong {
+    color: var(--lime);
+}
+
+/* =================================
+   10. PROJECT DETAIL MODAL
+================================= */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #191919b8;
+    display: none;
+    place-items: center;
+    padding: 20px;
+}
+
+.modal.open {
+    display: grid;
+}
+
+.modal-card {
+    width: min(530px, 100%);
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 9px 9px 0 var(--lime);
+    padding: 28px;
+    animation: pop .2s ease;
+}
+
+@keyframes pop {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.modal-close {
+    border: 1px solid var(--ink);
+    background: transparent;
+    width: 34px;
+    height: 34px;
+    font-size: 20px;
+}
+
+.modal-card h2 {
+    font-family: var(--display);
+    font-size: 34px;
+    letter-spacing: -1px;
+    margin-bottom: 15px;
+}
+
+.modal-card p {
+    font-size: 12px;
+    color: #66635c;
+    line-height: 2;
+}
+
+.modal-tags {
+    margin-top: 20px;
+    font-size: 10px;
+    line-height: 2;
+    color: #7153ce;
+}
+
+/* =================================
+   11. MOBILE
+================================= */
+@media (max-width: 760px) {
+    .nav-inner {
+        min-height: 60px;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        padding: 20px 5%;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 75px 0;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 55px;
+    }
+
+    .hero h1 {
+        font-size: clamp(62px, 15vw, 92px);
+        letter-spacing: -5px;
+    }
+
+    .blueprint {
+        max-width: 440px;
+        width: 95%;
+        margin: auto;
+    }
+
+    .section {
+        padding: 75px 0;
+    }
+
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .section-heading p {
+        max-width: 390px;
+    }
+
+    .code-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .code-sidebar {
+        border-right: none;
+        border-bottom: 1px solid #454540;
+    }
+
+    .exhibit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exhibit-art {
+        height: 220px;
+    }
+
+    .timeline-item {
+        grid-template-columns: 70px 1fr;
+        gap: 12px;
+    }
+
+    .timeline-status {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+    .contact-title {
+        letter-spacing: -3px;
+    }
+
+    .final-note {
+        flex-direction: column;
+        margin-top: 65px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+    <div class="wrap nav-inner">
+        <a class="brand" href="#home">SWETHA<span>.DEV</span></a>
+
+        <button class="nav-toggle" id="navToggle"
+                aria-expanded="false" aria-controls="navLinks">
+            MENU +
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#about">SOURCE CODE</a>
+            <a href="#museum">MUSEUM</a>
+            <a href="#journey">BUILD LOG</a>
+            <a href="#terminal">TERMINAL</a>
+            <a href="#contact">CONTACT ↗</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+    <div class="wrap hero-grid">
+        <div>
+            <div class="status-line">
+                <span class="status-dot"></span>
+                PERSONAL WEBSITE // WORK IN PROGRESS
+            </div>
+
+            <p class="eyebrow">EXHIBIT NO. 001 — HUMAN.EXE</p>
+
+            <h1>
+                STILL<br>
+                <span class="outline">BECOMING</span><br>
+                A DEV<span style="color:#7153ce">.</span>
+            </h1>
+
+            <p class="hero-description">
+                Hey, I'm <strong>Swetha</strong> — a student learning to turn
+                ideas into websites. This is not a showcase of perfection.
+                It's a living record of the person I'm becoming,
+                one line of code at a time.
+            </p>
+
+            <div class="actions">
+                <a class="btn" href="#museum">EXPLORE MY WORLD ↘</a>
+                <a class="btn light" href="#about">MEET THE DEVELOPER</a>
+            </div>
+
+            <p class="hero-note">
+                NO EXPERIENCE IS WASTED. NO BUG IS THE END.
+            </p>
+        </div>
+
+        <div class="blueprint">
+            <div class="sticker">UNDER CONSTRUCTION!</div>
+
+            <div class="blueprint-top">
+                <span>SWETHA_BUILD.exe</span>
+                <span>v.01</span>
+            </div>
+
+            <div class="blueprint-art">
+                <span class="art-label">FIG 01 // THE PROCESS</span>
+            </div>
+
+            <div class="blueprint-info">
+                <div class="label-row">
+                    <span>DEVELOPER IN PROGRESS</span>
+                    <span id="progressNumber">38%</span>
+                </div>
+
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <p>
+                    STATUS: LEARNING<br>
+                    CURRENT MISSION: BUILD, BREAK, UNDERSTAND, REPEAT.
+                </p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- MOVING STRIP -->
+<div class="code-strip" aria-hidden="true">
+    <div class="marquee">
+        <span>✳ LEARN SOMETHING</span>
+        <span>✳ BUILD SOMETHING</span>
+        <span>✳ BREAK SOMETHING</span>
+        <span>✳ FIX SOMETHING</span>
+        <span>✳ REPEAT FOREVER</span>
+        <span>✳ LEARN SOMETHING</span>
+        <span>✳ BUILD SOMETHING</span>
+        <span>✳ BREAK SOMETHING</span>
+        <span>✳ FIX SOMETHING</span>
+        <span>✳ REPEAT FOREVER</span>
+    </div>
+</div>
+
+<main>
+
+<!-- SOURCE CODE -->
+<section class="section" id="about">
+    <div class="wrap">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">01 / OPEN THE SOURCE</p>
+                <h2>THE HUMAN<br>BEHIND THE CODE.</h2>
+            </div>
+            <p>
+                Every developer has a story before the first
+                big project. Here's a little of mine.
+            </p>
+        </div>
+
+        <div class="code-panel">
+            <aside class="code-sidebar">
+                <p class="eyebrow">EXPLORER</p>
+
+                <div class="file-row"><span>▾</span> swetha.dev</div>
+                <div class="file-row"><span>◇</span> about-me.js</div>
+                <div class="file-row"><span>◇</span> my-goals.json</div>
+                <div class="file-row"><span>◇</span> currently-learning.md</div>
+
+                <h3>COMMIT MESSAGE</h3>
+                <p>
+                    "Started before I felt ready."<br>
+                    "Learned by actually doing."<br>
+                    "Still pushing forward."
+                </p>
+            </aside>
+
+            <div class="code-main">
+                <div class="code-window-bar">
+                    <i></i><i></i><i></i>
+                </div>
+
+<pre><span class="syntax-purple">const</span> swetha = {
+  name: <span class="syntax-green">"Swetha P S"</span>,
+  role: <span class="syntax-green">"Aspiring Web Developer"</span>,
+
+  currentlyLearning: [
+    <span class="syntax-orange">"HTML"</span>,
+    <span class="syntax-orange">"CSS"</span>,
+    <span class="syntax-orange">"JavaScript"</span>
+  ],
+
+  mindset: <span class="syntax-green">"learn by building"</span>,
+  curiosity: <span class="syntax-green">"alwaysOn"</span>,
+  perfection: <span class="syntax-green">false</span>,
+
+  nextMission: <span class="syntax-green">"Full Stack Developer"</span>
+};
+
+<span class="syntax-muted">// This is a journey, not a finished product.</span>
+<span class="syntax-purple">while</span> (dreamsExist) {
+  learn();
+  build();
+  improve();
+}</pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MUSEUM -->
+<section class="section museum" id="museum">
+    <div class="wrap">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">02 / THE PERSONAL MUSEUM</p>
+                <h2>THINGS I'VE<br>BEEN BUILDING.</h2>
+            </div>
+            <p>
+                Every project is an exhibit. Click one to discover
+                the idea, the purpose, and the next step.
+            </p>
+        </div>
+
+        <div class="exhibit-grid">
+
+            <button class="exhibit"
+                data-title="RFMS Fleet"
+                data-status="PROJECT IN PROGRESS"
+                data-description="A fleet and bus-route management interface designed to help drivers record daily-wager headcounts at stops while transport administrators manage routes and review information."
+                data-details="Focus: practical dashboard design, forms, route data, and clear user experiences. Replace this description with the features you have actually completed."
+                data-tags="HTML · CSS · JavaScript · Frontend">
+                <div class="exhibit-art html-art">
+                    <span class="art-number">EXHIBIT 001</span>
+                    <span class="big-symbol">01</span>
+                    <span class="art-stamp">FIELD NOTES</span>
+                </div>
+                <div class="exhibit-copy">
+                    <span class="eyebrow">PRACTICAL WEB APPLICATION</span>
+                    <h3>RFMS Fleet</h3>
+                    <p>A fleet interface exploring routes, headcounts, and useful dashboard design.</p>
+                    <div class="exhibit-bottom">
+                        <span>IN PROGRESS</span><span>OPEN EXHIBIT ↗</span>
+                    </div>
+                </div>
+            </button>
+
+            <button class="exhibit"
+                data-title="Student Mental Well-being"
+                data-status="CONCEPT / DESIGN EXPLORATION"
+                data-description="A student-focused digital concept for checking in with yourself, reflecting on your day, and exploring simple well-being resources."
+                data-details="The goal is to make the experience welcoming and easy to use. This is a concept, not a medical tool. Add your actual screens, features, and implementation as you build them."
+                data-tags="UI/UX · HTML · CSS · JavaScript">
+                <div class="exhibit-art css-art">
+                    <span class="art-number">EXHIBIT 002</span>
+                    <span class="big-symbol">♡</span>
+                    <span class="art-stamp">IDEA ARCHIVE</span>
+                </div>
+                <div class="exhibit-copy">
+                    <span class="eyebrow">A HUMAN-CENTRED CONCEPT</span>
+                    <h3>Student Well-being</h3>
+                    <p>A gentle digital space concept designed around student reflection and everyday well-being.</p>
+                    <div class="exhibit-bottom">
+                        <span>DESIGN EXPLORATION</span><span>OPEN EXHIBIT ↗</span>
+                    </div>
+                </div>
+            </button>
+
+            <button class="exhibit"
+                data-title="Smart Library"
+                data-status="PROJECT IDEA"
+                data-description="A concept for making library tasks easier through a digital catalogue, book discovery, and streamlined borrowing workflows."
+                data-details="Possible next steps include designing the book catalogue, creating search and filter controls, and exploring QR-based book identification."
+                data-tags="Web Design · JavaScript · Database Concepts">
+                <div class="exhibit-art idea-art">
+                    <span class="art-number">EXHIBIT 003</span>
+                    <span class="big-symbol">Aa</span>
+                    <span class="art-stamp">IDEA ARCHIVE</span>
+                </div>
+                <div class="exhibit-copy">
+                    <span class="eyebrow">A SMALL IDEA, A BIGGER SYSTEM</span>
+                    <h3>Smart Library</h3>
+                    <p>Exploring how a digital catalogue could make finding and borrowing books easier.</p>
+                    <div class="exhibit-bottom">
+                        <span>IDEA STAGE</span><span>OPEN EXHIBIT ↗</span>
+                    </div>
+                </div>
+            </button>
+
+            <button class="exhibit"
+                data-title="CSS Experiment Lab"
+                data-status="ONGOING PRACTICE"
+                data-description="A collection of small experiments exploring hover states, transitions, cards, borders, typography, and responsive layouts."
+                data-details="This is where small exercises turn into reusable skills. Add screenshots or links to your real experiments as you complete them."
+                data-tags="HTML · CSS · Animation · Responsive Design">
+                <div class="exhibit-art library-art">
+                    <span class="art-number">EXHIBIT 004</span>
+                    <span class="big-symbol">{ }</span>
+                    <span class="art-stamp">WORKSHOP</span>
+                </div>
+                <div class="exhibit-copy">
+                    <span class="eyebrow">THE EXPERIMENT ROOM</span>
+                    <h3>CSS Experiment Lab</h3>
+                    <p>Little visual experiments that help me understand how the web works.</p>
+                    <div class="exhibit-bottom">
+                        <span>ONGOING</span><span>OPEN EXHIBIT ↗</span>
+                    </div>
+                </div>
+            </button>
+
+        </div>
+    </div>
+</section>
+
+<!-- BUILD LOG -->
+<section class="section" id="journey">
+    <div class="wrap">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">03 / THE BUILD LOG</p>
+                <h2>VERSION<br>BY VERSION.</h2>
+            </div>
+            <p>
+                Progress isn't always a straight line.
+                These are the skills I'm developing.
+            </p>
+        </div>
+
+        <div class="timeline">
+            <article class="timeline-item">
+                <span class="timeline-date">STAGE 01</span>
+                <div>
+                    <h3>Giving ideas a structure.</h3>
+                    <p>Learning HTML elements, headings, links, images, tables, and how a webpage is organised.</p>
+                </div>
+                <span class="timeline-status done">LEARNING</span>
+            </article>
+
+            <article class="timeline-item">
+                <span class="timeline-date">STAGE 02</span>
+                <div>
+                    <h3>Making things look alive.</h3>
+                    <p>Exploring CSS selectors, colours, spacing, layouts, hover effects, and responsive design.</p>
+                </div>
+                <span class="timeline-status done">LEARNING</span>
+            </article>
+
+            <article class="timeline-item">
+                <span class="timeline-date">STAGE 03</span>
+                <div>
+                    <h3>Teaching pages to respond.</h3>
+                    <p>Building a foundation in JavaScript, including variables, functions, events, and interactive interfaces.</p>
+                </div>
+                <span class="timeline-status">IN PROGRESS</span>
+            </article>
+
+            <article class="timeline-item">
+                <span class="timeline-date">STAGE 04</span>
+                <div>
+                    <h3>Building the whole thing.</h3>
+                    <p>My longer-term goal: learning backend development and connecting it to useful frontend experiences.</p>
+                </div>
+                <span class="timeline-status">UP NEXT</span>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- INTERACTIVE TERMINAL -->
+<section class="section" id="terminal">
+    <div class="wrap">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">04 / A LITTLE SECRET</p>
+                <h2>THE COMMAND<br>LINE.</h2>
+            </div>
+            <p>
+                A tiny interactive terminal. Type a command,
+                press Enter, and explore.
+            </p>
+        </div>
+
+        <div class="terminal">
+            <div class="terminal-header">
+                <span>swetha@portfolio: ~</span>
+                <span>INTERACTIVE SHELL</span>
+            </div>
+
+            <div class="terminal-body">
+                <div id="terminalOutput" class="terminal-output">Welcome, curious human.
+Type "help" to see available commands.
+
+</div>
+                <form class="terminal-form" id="terminalForm">
+                    <label for="terminalInput" class="terminal-prompt">visitor@swetha:~$</label>
+                    <input id="terminalInput" autocomplete="off"
+                        spellcheck="false" placeholder="type a command..."
+                        aria-label="Enter a terminal command">
+                    <button type="submit">RUN ↵</button>
+                </form>
+            </div>
+
+            <div class="command-hints">
+                <button type="button" data-command="help">help</button>
+                <button type="button" data-command="about">about</button>
+                <button type="button" data-command="projects">projects</button>
+                <button type="button" data-command="skills">skills</button>
+                <button type="button" data-command="contact">contact</button>
+                <button type="button" data-command="clear">clear</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- CONTACT -->
+<footer class="contact-section" id="contact">
+    <div class="wrap">
+        <p class="eyebrow">05 / END OF EXHIBITION. BEGINNING OF SOMETHING.</p>
+
+        <h2 class="contact-title">
+            NOT FINISHED.<br>
+            <span>JUST GETTING STARTED.</span>
+        </h2>
+
+        <p class="contact-intro">
+            I'm learning, experimenting, and working towards becoming
+            a full-stack developer. If you want to talk about a project,
+            share an idea, or connect, I'd love to hear from you.
+        </p>
+
+        <div class="contact-links">
+            <!-- Replace these placeholder links with your real details. -->
+            <a class="btn lime" href="mailto:YOUR_EMAIL@example.com">
+                SEND AN EMAIL ↗
+            </a>
+
+            <a class="btn" href="https://github.com/"
+               target="_blank" rel="noopener noreferrer">
+                GITHUB ↗
+            </a>
+
+            <a class="btn" href="https://www.linkedin.com/"
+               target="_blank" rel="noopener noreferrer">
+                LINKEDIN ↗
+            </a>
+        </div>
+
+        <div class="final-note">
+            <span>© <span id="year"></span> SWETHA P S — BUILT WITH CURIOSITY.</span>
+            <strong>STATUS: STILL BECOMING ●</strong>
+            <span>EVERY EXPERT WAS ONCE A BEGINNER.</span>
+        </div>
+    </div>
+</footer>
+
+<!-- EXHIBIT DETAIL MODAL -->
+<div class="modal" id="projectModal"
+     role="dialog" aria-modal="true"
+     aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-card">
+        <div class="modal-top">
+            <span class="eyebrow" id="modalStatus">EXHIBIT DETAILS</span>
+            <button class="modal-close" id="modalClose"
+                    aria-label="Close exhibit">×</button>
+        </div>
+        <h2 id="modalTitle">Project title</h2>
+        <p id="modalDescription"></p>
+        <p id="modalDetails" style="margin-top:14px"></p>
+        <div class="modal-tags" id="modalTags"></div>
+    </div>
+</div>
+
+<script>
+/* =================================
+   1. MOBILE NAVIGATION
+================================= */
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+
+navToggle.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", isOpen);
+    navToggle.textContent = isOpen ? "CLOSE ×" : "MENU +";
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.textContent = "MENU +";
+    });
+});
+
+/* =================================
+   2. HERO PROGRESS ANIMATION
+   This is a visual theme element,
+   not a measured skill assessment.
+================================= */
+const progressFill = document.getElementById("progressFill");
+const progressNumber = document.getElementById("progressNumber");
+
+window.addEventListener("load", () => {
+    requestAnimationFrame(() => {
+        progressFill.style.width = "38%";
+    });
+});
+
+/* =================================
+   3. PROJECT EXHIBIT MODALS
+================================= */
+const modal = document.getElementById("projectModal");
+const modalClose = document.getElementById("modalClose");
+
+const modalTitle = document.getElementById("modalTitle");
+const modalStatus = document.getElementById("modalStatus");
+const modalDescription = document.getElementById("modalDescription");
+const modalDetails = document.getElementById("modalDetails");
+const modalTags = document.getElementById("modalTags");
+
+let previousFocus = null;
+
+document.querySelectorAll(".exhibit").forEach(exhibit => {
+    exhibit.addEventListener("click", () => {
+        previousFocus = exhibit;
+
+        modalTitle.textContent = exhibit.dataset.title;
+        modalStatus.textContent = exhibit.dataset.status;
+        modalDescription.textContent = exhibit.dataset.description;
+        modalDetails.textContent = exhibit.dataset.details;
+        modalTags.textContent = "TOOLS / " + exhibit.dataset.tags;
+
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        modalClose.focus();
+    });
+});
+
+function closeModal() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+
+    if (previousFocus) {
+        previousFocus.focus();
+    }
+}
+
+modalClose.addEventListener("click", closeModal);
+
+modal.addEventListener("click", event => {
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && modal.classList.contains("open")) {
+        closeModal();
+    }
+});
+
+/* =================================
+   4. INTERACTIVE TERMINAL
+================================= */
+const terminalForm = document.getElementById("terminalForm");
+const terminalInput = document.getElementById("terminalInput");
+const terminalOutput = document.getElementById("terminalOutput");
+
+const commands = {
+    help: `AVAILABLE COMMANDS
+
+about     - Learn about Swetha
+projects  - Explore the project exhibits
+skills    - View current learning areas
+contact   - Jump to contact links
+clear     - Clear the terminal
+
+TIP: Try typing a command yourself.`,
+
+    about: `HELLO, I'M SWETHA.
+
+I'm a student and aspiring web developer.
+I'm learning to turn ideas into working websites.
+
+My approach:
+Learn something. Build something. Improve something.
+
+Long-term mission: become a full-stack developer.`,
+
+    projects: `PROJECT EXHIBITS
+
+01 / RFMS Fleet
+    A fleet-management interface in progress.
+
+02 / Student Mental Well-being
+    A student-focused concept.
+
+03 / Smart Library
+    A digital library idea.
+
+04 / CSS Experiment Lab
+    A collection of hands-on UI experiments.
+
+Open the MUSEUM section for more details.`,
+
+    skills: `CURRENT LEARNING MAP
+
+HTML         Structure and content
+CSS          Styling and layouts
+JavaScript   Interactivity and programming
+Git/GitHub   Version control and collaboration
+
+These are learning areas, not proficiency scores.
+The journey continues!`,
+
+    contact: `LET'S CONNECT.
+
+Email: replace YOUR_EMAIL@example.com
+GitHub: add your GitHub profile URL
+LinkedIn: add your LinkedIn profile URL
+
+Scroll to the contact section to use the links.`,
+
+    clear: ""
+};
+
+function runCommand(rawCommand) {
+    const command = rawCommand.trim().toLowerCase();
+
+    if (!command) return;
+
+    if (command === "clear") {
+        terminalOutput.textContent = "";
+        return;
+    }
+
+    const result = commands[command] ??
+        `Command not found: "${command}"
+
+Type "help" to see the available commands.`;
+
+    terminalOutput.textContent +=
+        "\nvisitor@swetha:~$ " + rawCommand + "\n" +
+        result + "\n";
+
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+terminalForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    runCommand(terminalInput.value);
+    terminalInput.value = "";
+});
+
+document.querySelectorAll("[data-command]").forEach(button => {
+    button.addEventListener("click", () => {
+        const command = button.dataset.command;
+        runCommand(command);
+        terminalInput.focus();
+    });
+});
+
+/* =================================
+   5. FOOTER YEAR
+================================= */
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+</script>
+
+</body>
+</html>
